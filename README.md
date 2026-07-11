@@ -201,6 +201,7 @@ My EVE dream is simple: one day undock a **Supercarrier**, and eventually a **Ti
 
 - Donations are **100% voluntary** — the tool is free and complete, and stays that way whether you donate or not. No perks, no priority features, no obligations.
 - **In-game ISK only**, sent to the character **`JF G`** (in EVE: search the character, right-click → *Give Money*). Never send real money — that's not what this is about.
+<img width="128" height="122" alt="image" src="https://github.com/user-attachments/assets/1e3a8d79-5c32-44e8-928a-eac3ef923fe3" />
 
 Every ISK goes into the hangar fund. Fly safe o7
 
