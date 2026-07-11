@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity version="1.0.0.0" processorArchitecture="*" name="EveThreatMonitor" type="win32"/>
+  <description>EVE Threat Monitor</description>
+
+  <!-- DPI awareness — matches Qt6's own per-monitor behaviour when run from
+       source, so the packaged exe positions the overlay identically across
+       a multi-monitor / mixed-DPI setup. -->
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
+    </windowsSettings>
+  </application>
+
+  <!-- Compatibility declared only up to Windows 8.1 — the Windows 10 GUID is
+       intentionally omitted. Without the Win10 manifest entry the process uses
+       GDI compositing instead of DirectComposition, which is required for
+       WA_TranslucentBackground to render correctly in the PyInstaller build.
+       See README "Known technical notes". -->
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/> <!-- Windows 7 -->
+      <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/> <!-- Windows 8 -->
+      <supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/> <!-- Windows 8.1 -->
+    </application>
+  </compatibility>
+</assembly>

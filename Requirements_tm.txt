@@ -1,0 +1,8 @@
+# EVE Threat Monitor Dependencies
+# Versions épinglées : garantit un build PyInstaller reproductible (une mise à
+# jour majeure silencieuse — ex. PyQt6 7 — casserait l'exe). Bumper après re-test.
+PyQt6==6.11.0
+mss==10.2.0
+numpy==2.5.0
+requests==2.34.2
+plyer==2.1.0

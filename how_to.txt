@@ -1,0 +1,362 @@
+===============================================================
+  EVE THREAT MONITOR — HOW TO USE
+===============================================================
+
+
+---------------------------------------------------------------
+0. DISCLAIMER — READ FIRST
+---------------------------------------------------------------
+
+This is a personal project / experiment, not affiliated with
+CCP Games. It is strictly passive (it only reads pixels and
+alerts you — it never clicks, types, or plays the game for
+you), but screen-reading tools live in a grey zone: it may or
+may not be compatible with the EVE Online EULA / Terms of
+Service. USE IT AT YOUR OWN RISK.
+
+NO AUTOMATION is allowed while using this tool. Do not combine
+it with bots, input broadcasters, or anything that automates
+gameplay.
+
+
+---------------------------------------------------------------
+1. FIRST-TIME SETUP
+---------------------------------------------------------------
+
+1. Make sure EVE Online is running and the Local chat (or
+   overview column with standing icons) is visible on screen.
+
+2. Launch the app:
+     python threat_monitor.py
+   or double-click: Eve Threat.exe
+
+3. The compact HUD appears. It is transparent and always on top.
+
+4. Configure EVE for optimal detection contrast (do this once):
+
+   The pixel detector needs the standing-color icons to sit on a
+   DARK background. Two EVE client settings guarantee this:
+
+   a. Open EVE Settings (Esc) and go to the "Window Appearance"
+      section. Set the "Transparency" slider to Off (fully left).
+      Leave "Light Mode Transparency" as it is — it has no effect
+      here.
+
+   b. In the Local chat window, open its channel menu and make sure
+      "Enable Light Background" is NOT active (leave it off).
+
+   With Transparency set to Off AND Light Background left disabled,
+   the standing icons render at full contrast on a dark panel — the
+   optimal condition for reliable threat detection. A light or
+   semi-transparent chat background washes out the standing colors
+   and can cause missed or false detections.
+
+
+---------------------------------------------------------------
+2. SELECTING THE CAPTURE REGION
+---------------------------------------------------------------
+
+The app reads a narrow vertical strip of pixels from your
+screen to detect standing colors. You must tell it exactly
+where to look.
+
+Steps:
+  a. Right-click the HUD -> "Re-select Capture Region..."
+     (or press F3).
+  b. A fullscreen selector overlay appears.
+  c. Click and drag over the standing color column in EVE's
+     Local chat or overview (the colored squares next to names).
+  d. Press Enter to confirm (Esc cancels). The region is saved
+     automatically.
+
+The selector accounts for Windows display scaling. Keep the whole
+selection on one monitor; a selection crossing two monitors is rejected
+because the displays may use different scale factors. After upgrading the
+app on a scaled display, older saved capture coordinates may be cleared once
+and the HUD will show "REQ F2/F3" so they can be selected safely again.
+
+Tip: Select only the leftmost 10-15 pixels of that column.
+The detector reads a 12-pixel-wide strip starting at x=4.
+
+Optional — Mirror Window: Right-click -> "Open Mirror Window..."
+(or F2) shows a live copy of a screen region. If you draw the
+capture region INSIDE the mirror, detection follows the mirror
+when you move it, so keep the mirror open while monitoring.
+Note: if you later re-select a DIFFERENT mirror region with F2,
+the old capture offsets no longer point at meaningful content, so
+they are cleared and the HUD shows "REQ F3" — draw the capture
+region again inside the new mirror.
+
+
+---------------------------------------------------------------
+3. MAIN HUD CONTROLS
+---------------------------------------------------------------
+
+Titlebar buttons:
+  [Play/Stop]   — Start or stop scanning
+  [Pause]       — Pause/resume alerts; capture and counters continue
+  [Close]       — Quit the application
+
+Double-click the titlebar to collapse/expand the HUD.
+Drag the titlebar to move the window.
+
+Right-click anywhere on the HUD for:
+  - Start / Stop monitoring
+  - Open Mirror Window...
+  - Re-select capture region...
+  - zKill Scan: ON / OFF
+  - Adjust Transparency...
+  - Theme (20+ EVE faction themes)
+
+Keyboard shortcuts (when the HUD has focus):
+  F1     — Start / Stop monitoring
+  F2     — Open Mirror Window
+  F3     — Re-select capture region
+  F5     — Toggle zKillboard clipboard scan
+  F10    — Simulate a threat (testing)
+  Space  — Acknowledge / silence the alert
+  Esc    — Quit
+
+System tray icon (bottom-right taskbar):
+  - Right-click -> Show / Hide / Quit
+  (Hide only hides the main HUD; an open Mirror Window stays
+   visible because detection reads its pixels.)
+
+
+---------------------------------------------------------------
+4. READING THE THREAT DISPLAY
+---------------------------------------------------------------
+
+The HUD shows a status line plus two counters:
+
+  STATUS        — IDLE / CHECKING / ALL CLEAR / HOSTILE / PAUSED /
+                  NO MIRROR / MON FAIL
+  Neuts:  N     = hostile pilots detected (red + neutral icons)
+  Friends: N    = friendly pilots detected (green/blue/purple)
+
+CHECKING appears while the first capture is being validated. The status
+reads HOSTILE whenever one or more hostiles are present. ALL CLEAR means a
+capture completed successfully and found zero threats; a failed or invalid
+capture never becomes ALL CLEAR. A brief "[+N]" delta
+appears next to the Neuts count when the number changes.
+
+PAUSED suspends sound and notifications while capture and counters continue.
+NO MIRROR means detection depends on a mirror that has been closed, so
+protection is suspended. MON FAIL means monitoring stopped after three
+consecutive capture errors. If the Windows display layout, resolution,
+or scaling changes while monitoring, monitoring stops and the status
+shows SCREEN CHG (with a toast): the old coordinates could capture the
+wrong content. Verify the region (F3 if needed) and restart with F1.
+
+When hostiles are detected:
+  - The status switches to HOSTILE and the corner brackets
+    turn red.
+  - A sound alert plays (alert_hostile.wav), repeating every
+    5 seconds until acknowledged.
+  - A desktop notification appears.
+
+Press Space to acknowledge and silence the repeating alert,
+or use [Pause] to suspend alerts entirely.
+
+
+---------------------------------------------------------------
+5. ZKILLBOARD PILOT LOOKUP
+---------------------------------------------------------------
+
+1. Enable the clipboard scan: press F5, or right-click the
+   HUD -> "zKill Scan". A brief "SCAN ON" / "SCAN OFF" message flashes
+   in the status line (about 1.5 s) then falls back to the real safety
+   state, so it never hides ALL CLEAR or HOSTILE. While the scan is on,
+   the title glyph stays ◈ -> ◉ and turns yellow, and its tooltip says
+   "zKill scan ON" — a persistent indicator that never replaces the
+   safety status.
+
+2. In EVE, right-click a pilot -> Copy Name.
+
+3. A stats card pops up next to the HUD automatically.
+
+The stats card shows:
+  - Danger rating (0-100%)
+  - Combat summary (kills, losses, ISK, efficiency, solo kills)
+  - Playstyle breakdown (solo vs. group — real zKill ratios only)
+  - Pilot tags (DANGEROUS / SOLO HUNTER / HIGH EFF. / ...)
+  - [MORE] expands extended intel: kills this month, top ships,
+    most active system
+
+Click "zkillboard" on the card to open the full profile in your
+browser. Fresh stats are cached for 5 minutes. During an outage, a successful
+cached result may be reused for up to 1 hour. Name resolutions are cached for
+1 hour and failures for 1 minute. Requires an internet connection.
+
+Lookup messages:
+  UNKNOWN PILOT — CCP ESI found no exact character with that name.
+  NO DATA       — the character exists, but zKillboard returned no usable stats.
+  RATE LIMITED  — zKillboard asked the app to wait before another request.
+  NETWORK ERROR — ESI, zKillboard, or its response is temporarily unavailable.
+
+PRIVACY NOTE: While the clipboard scan is ON, anything you copy
+that looks like an EVE pilot name (3-37 chars, single line,
+letters/digits/space/apostrophe/dash) is sent to CCP's ESI to be
+resolved. The resulting character ID is sent to zKillboard. Pilot
+identifiers may appear in the local rotating log, and network requests use
+an application User-Agent containing the maintainer contact. Turn the scan
+OFF (F5) when you are not actively looking up pilots.
+
+
+---------------------------------------------------------------
+6. MIRROR WINDOW
+---------------------------------------------------------------
+
+The mirror window shows a scaling-correct live preview of a screen region
+(refreshes about every 100 ms, or roughly 10 FPS). Unchanged frames are not
+repainted. Temporary capture failures are tolerated for about 10 seconds; a
+persistent failure closes the mirror. If detection depends on that mirror,
+the HUD changes to NO MIRROR. While the mirror's own capture is failing,
+its frozen last frame is NEVER analyzed — the HUD holds CHECKING instead
+of trusting stale pixels.
+
+Use it to verify the capture region is aligned with EVE's
+standing color column, or as the detection source itself when
+you select the capture region inside the mirror.
+
+
+---------------------------------------------------------------
+7. THEMES
+---------------------------------------------------------------
+
+Right-click the HUD -> Theme -> pick any EVE faction theme.
+
+Available themes include:
+  EVE Online (default), Caldari I/II, Minmatar I/II,
+  Amarr I/II, Gallente I/II, Guristas, Blood Raiders,
+  Angel Cartel, Serpentis, Sansha's Nation, Triglavian,
+  EDENCOM, Sisters of EVE, Intaki Syndicate, ORE,
+  Mordu's Legion, Thukker Tribe, CONCORD, SOC.
+
+Theme choice is saved and restored on next launch.
+
+
+---------------------------------------------------------------
+8. TRANSPARENCY
+---------------------------------------------------------------
+
+Right-click the HUD -> Adjust Transparency -> drag the slider.
+Range: 20% (nearly invisible) to 100% (fully opaque).
+Saved automatically.
+
+
+---------------------------------------------------------------
+9. TROUBLESHOOTING
+---------------------------------------------------------------
+
+App is transparent but controls are invisible:
+  Already handled internally. If this recurs on a new OS
+  install, verify that QT_QPA_NO_DIRECT2D=1 is set before
+  launch (the app sets this automatically at startup).
+
+No threats detected even though hostiles are visible:
+  - Check the EVE background settings (setup step 4): Transparency
+    must be Off and "Enable Light Background" must be disabled on the
+    Local channel. A light/transparent chat background washes out the
+    standing colors and defeats detection.
+  - Re-run the area selector (step 2) — region may have drifted
+    if you moved/resized the EVE window.
+  - If the HUD shows REQ F2/F3 after an upgrade, select the
+    region again; legacy coordinates were unsafe at the current scaling.
+  - Keep the complete selection on one display.
+  - After changing Windows scaling, resolution, or monitor arrangement,
+    reselect the affected regions with F2/F3.
+  - Make sure the standing icon column is fully visible and
+    not overlapping any other UI element.
+  - If you draw the region inside the Mirror Window, keep the
+    mirror open and unobstructed while monitoring.
+
+zKillboard card does not appear:
+  - Make sure the clipboard scan is ON (F5 / right-click menu).
+  - Check internet connectivity.
+  - Pilot name must be exact (copy from EVE, do not retype).
+  - UNKNOWN PILOT: copy the exact in-game name again.
+  - NO DATA: the pilot has no usable zKill statistics yet.
+  - RATE LIMITED: wait before retrying; the server controls the delay.
+  - NETWORK ERROR: check connectivity and retry later.
+
+Sound alert does not play:
+  - Packaged build (Eve Threat.exe): the sound is embedded
+    inside the executable — there is nothing to copy next to
+    it. If it stays silent, the build is incomplete; rebuild
+    with the provided threat_monitor.spec.
+  - Running from source: verify alert_hostile.wav is in the
+    project folder, next to threat_monitor.py.
+  - Windows: check the volume mixer — "Eve Threat" or "python"
+    must not be muted.
+  - macOS: sound plays through the built-in "afplay" tool
+    (always present); check output volume.
+  - Linux: install "paplay" (PulseAudio/PipeWire, package
+    pulseaudio-utils) or "aplay" (package alsa-utils). Without
+    one of them the app runs but stays silent.
+
+App won't start (PyInstaller build):
+  - Run the single-file Eve Threat.exe from the dist/ folder.
+  - If missing DLL errors appear, install the Visual C++
+    Redistributable (VC_redist.x64.exe) from Microsoft.
+
+
+---------------------------------------------------------------
+10. FILES CREATED BY THE APP
+---------------------------------------------------------------
+
+  threat_config.json — your saved settings (region, theme,
+                       positions). Delete this to reset to
+                       defaults on next launch.
+
+  threat_monitor.log — runtime log (errors and warnings). Safe
+                       to delete; useful when reporting a bug.
+
+
+---------------------------------------------------------------
+11. PLATFORM NOTES (macOS / LINUX)
+---------------------------------------------------------------
+
+The app is developed and packaged on Windows; on macOS and
+Linux run it from source (python threat_monitor.py).
+
+macOS:
+  - Grant Screen Recording permission the first time
+    (System Settings -> Privacy & Security -> Screen Recording,
+    enable your terminal or Python). Without it, captures come
+    back black and monitoring reports errors.
+  - Sound uses the built-in "afplay"; nothing to install.
+  - Toast notifications use the built-in "osascript"; nothing
+    to install.
+
+Linux:
+  - An X11 session is required (or XWayland: the app forces
+    Qt's "xcb" backend automatically). On pure Wayland, screen
+    capture and always-on-top overlay windows are not possible.
+    Note that under a Wayland session, XWayland capture only
+    sees other X11 apps — run EVE via Wine/Proton (X11) and
+    prefer logging into an X11/Xorg session if captures stay
+    black.
+  - Sound needs "paplay" (pulseaudio-utils) or "aplay"
+    (alsa-utils) — one of them is preinstalled on most desktop
+    distributions.
+  - Toast notifications use "notify-send" (package libnotify /
+    libnotify-bin).
+
+EVE runs in a window on all platforms; keep the Local chat
+visible as usual. All hotkeys and features work identically.
+
+
+---------------------------------------------------------------
+12. SUPPORT THE DREAM (VOLUNTARY)
+---------------------------------------------------------------
+
+My EVE dream is a Supercarrier — and one day, a Titan. If this
+tool saved your ship, you can chip in with a 100% VOLUNTARY
+in-game ISK donation to the character:  JF G
+(in EVE: search "JF G", right-click -> Give Money).
+
+No perks, no obligations — and never real money. Fly safe o7
+
+
+===============================================================

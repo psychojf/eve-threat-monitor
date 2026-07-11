@@ -1,0 +1,5 @@
+# Outils de développement — épinglés pour une vérification et un build
+# reproductibles (même raison que Requirements_tm.txt : un bump silencieux
+# de PyInstaller changerait l'exe produit sans re-test).
+pytest==9.1.1
+PyInstaller==6.21.0
