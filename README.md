@@ -16,8 +16,6 @@ Every ISK goes into the hangar fund. Fly safe o7
 
 ---
 
----
-
 ## ⚠️ Disclaimer — read this first
 
 This is a personal **project / experiment**, not a commercial product, and it is **not affiliated with, endorsed by, or supported by CCP Games** in any way.
