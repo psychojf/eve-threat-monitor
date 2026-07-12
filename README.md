@@ -4,6 +4,20 @@ A real-time threat detection overlay for **EVE Online**. Monitors your local cha
 
 ---
 
+## Support the dream — fly me toward a Titan 🚀
+
+My EVE dream is simple: one day undock a **Supercarrier**, and eventually a **Titan**. If this tool ever saved your ship (or your pod), you can help make that happen:
+
+- Donations are **100% voluntary** — the tool is free and complete, and stays that way whether you donate or not. No perks, no priority features, no obligations.
+- **In-game ISK only**, sent to the character **`JF G`** (in EVE: search the character, right-click → *Give Money*). Never send real money — that's not what this is about.
+<img width="128" height="122" alt="image" src="https://github.com/user-attachments/assets/1e3a8d79-5c32-44e8-928a-eac3ef923fe3" />
+
+Every ISK goes into the hangar fund. Fly safe o7
+
+---
+
+---
+
 ## ⚠️ Disclaimer — read this first
 
 This is a personal **project / experiment**, not a commercial product, and it is **not affiliated with, endorsed by, or supported by CCP Games** in any way.
@@ -192,20 +206,6 @@ pytest
 
 The suite is network-free (ESI/zKillboard are mocked) and screen-free (MSS and
 the Qt platform are faked/offscreen), so it runs anywhere without EVE or a display.
-
----
-
-## Support the dream — fly me toward a Titan 🚀
-
-My EVE dream is simple: one day undock a **Supercarrier**, and eventually a **Titan**. If this tool ever saved your ship (or your pod), you can help make that happen:
-
-- Donations are **100% voluntary** — the tool is free and complete, and stays that way whether you donate or not. No perks, no priority features, no obligations.
-- **In-game ISK only**, sent to the character **`JF G`** (in EVE: search the character, right-click → *Give Money*). Never send real money — that's not what this is about.
-<img width="128" height="122" alt="image" src="https://github.com/user-attachments/assets/1e3a8d79-5c32-44e8-928a-eac3ef923fe3" />
-
-Every ISK goes into the hangar fund. Fly safe o7
-
----
 
 ## License & community
 
