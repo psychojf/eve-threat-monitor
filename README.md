@@ -79,6 +79,51 @@ python threat_monitor.py
 
 ---
 
+## How to use
+
+The complete step-by-step manual lives in **[how_to.txt](how_to.txt)** — hotkeys, the
+zKillboard pilot lookup, themes, transparency, troubleshooting, and the macOS/Linux
+notes. Below are just the essentials to get monitoring correctly.
+
+### 1. Prep EVE for clean detection (do this once)
+
+The detector reads EVE's standing-color icons, and it needs them on a **dark** panel:
+
+- **EVE Settings (Esc) → Window Appearance:** set **Transparency** to **Off** (slider fully left).
+- **Local chat → channel menu:** make sure **Enable Light Background** is **off**.
+
+A light or semi-transparent chat background washes the standing colors out and causes
+missed or false detections.
+
+### 2. Select the capture region — ⚠️ ONLY the icons
+
+Right-click the HUD → **Re-select Capture Region…** (or press **F3**), then drag a
+selection over EVE's standing-icon column.
+
+> ## ⚠️ Select ONLY the icons — nothing else
+>
+> Drag over **only** the narrow column of standing-color icons — the little stars/squares
+> next to each pilot — **exactly like the picture below**. **Do not** include the pilot
+> names, ship types, or any other text. Selecting anything besides the icons feeds the
+> detector the wrong pixels and breaks threat detection. When in doubt, select *less*.
+
+<p align="center">
+  <img src="7.png" alt="Correct selection: ONLY the strip of standing-color icons" height="360" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="3.png" alt="The same icon column highlighted (red box) in EVE's Local member list" height="360" />
+</p>
+
+<p align="center"><em><b>Left:</b> select just this strip of icons — nothing else.
+&nbsp; <b>Right:</b> the same column (red box) inside EVE's Local member list.</em></p>
+
+Press **Enter** to confirm (**Esc** cancels); the region is saved automatically. Keep the
+whole selection on a single monitor. Then press **F1** (or the ▶ button) to start
+monitoring.
+
+That covers setup — for everything else, see the full guide in **[how_to.txt](how_to.txt)**.
+
+---
+
 ## Platform support
 
 | | Windows 10/11 | macOS | Linux |
@@ -133,6 +178,7 @@ TM/
 ├── Requirements_tm.txt     # pip dependencies (pinned)
 ├── requirements-dev.txt    # dev tools: pytest + PyInstaller (pinned)
 ├── how_to.txt              # End-user guide
+├── 1.png … 7.png           # Screenshots used by the README / guide
 ├── threat_config.json      # Auto-saved user config
 ├── threat_monitor.spec     # PyInstaller build spec
 ├── app.manifest            # Windows DPI + compatibility manifest
