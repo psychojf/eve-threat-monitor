@@ -27,3 +27,8 @@ docs/superpowers/
 # -- OS noise ------------------------------------------------------------------
 Thumbs.db
 .DS_Store
+
+# -- others --------------------------------------------------------------------
+downloads.ps1
+pytest.ini
+threat_monitor.spec
